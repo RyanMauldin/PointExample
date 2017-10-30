@@ -19,7 +19,6 @@ namespace PointExample.ConsoleApp.App_Start
         {
             // Setup our DI (Dependency Injection)
             var serviceProvider = new ServiceCollection()
-                .AddTransient<ITransformation, ArbitraryTransformation>()
                 .AddSingleton(
                     x => new PointFactory(
                         new ScreenPointFactory(new NoOpTransformation()),
