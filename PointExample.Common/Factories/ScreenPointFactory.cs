@@ -16,9 +16,9 @@ namespace PointExample.Common.Factories
         /// <summary>
         /// This is a threadsafe queue data structure to hold points
         /// created in advance to speed up random instantiation. Having
-        /// this inside a factory is known as a Flyweight Pattern.
+        /// this inside a factory is known as a Object Pool Pattern.
         /// </summary>
-        protected readonly ConcurrentQueue<ScreenPoint> FlyweightPoints;
+        protected readonly ConcurrentQueue<ScreenPoint> ObjectPoolPoints;
 
         /// <summary>
         /// The specific constructor that must be used.
@@ -27,9 +27,9 @@ namespace PointExample.Common.Factories
         public ScreenPointFactory(ITransformation transformation)
         {
             Transformation = transformation;
-            FlyweightPoints = new ConcurrentQueue<ScreenPoint>();
+            ObjectPoolPoints = new ConcurrentQueue<ScreenPoint>();
 
-            // Add initial flyweight points.
+            // Add initial object pool points.
             AddPoints(1000);
         }
 
@@ -44,9 +44,9 @@ namespace PointExample.Common.Factories
             try
             {
                 ScreenPoint point;
-                if (FlyweightPoints.TryDequeue(out point))
+                if (ObjectPoolPoints.TryDequeue(out point))
                 {
-                    // Try to use flyweight pattern.
+                    // Try to use object pool pattern.
                     point.X = x;
                     point.Y = y;
                 }
@@ -65,20 +65,20 @@ namespace PointExample.Common.Factories
             {
                 // See if more points should be added in bulk.
                 // Add them here or create a scheduler object.
-                if (FlyweightPoints.Count <= 100)
+                if (ObjectPoolPoints.Count <= 100)
                     AddPoints(1000);
             }
         }
 
         /// <summary>
-        /// Add more flyweight points to the queue or create
+        /// Add more object pool points to the queue or create
         /// a scheduler object and pass on the information.
         /// </summary>
         /// <param name="count">The number of potential points to add.</param>
         private void AddPoints(int count)
         {
             for (var i = 0; i < count; i++)
-                FlyweightPoints.Enqueue(new ScreenPoint(0, 0));
+                ObjectPoolPoints.Enqueue(new ScreenPoint(0, 0));
         }
     }
 }
