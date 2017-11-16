@@ -57,7 +57,7 @@ Anyways tag me back if any of what I have said is questionable or if you would l
 - Favor composition over inheritance. (`Has-A` is better than `Is-A`)
 - Dependency Inversion Principle (Depend upon abstractions. Do not depend upon concrete classes.)
 	* No variable should hold a reference to a concrete class. (If you use new, you'll be holding a reference to a concrete class. Use a factory to get around that!)
-	* No class should derive from a concrete class. (If you derive from a concrete class, you're depending on a concreate class. Derive from an abstraction, like an interface or an abstract class.)
+	* No class should derive from a concrete class. (If you derive from a concrete class, you're depending on a concrete class. Derive from an abstraction, like an interface or an abstract class.)
 	* No method should override an implemented method of any of its base classes. (If you override an implemented method, then your base class wasn't really an abstraction to start with.)
 <br /><br />
 Funny thing is the book goes forward to mention for `Dependency Inversion Principle`, that if you follow all three of those design guidelines with no exceptions that you would never be able to write a single program. So I will say to you that try to aim towards these principles, but only where they make the best sense. For any of the design patterns or principles there are both pros and cons. However, at least with the design patterns they are more like templates to do what you want from already solved problems. So plug them in and adapt them where they make sense to your design. Others will be familiar with your design and can jump right in with your naming strategy and add to your code.
